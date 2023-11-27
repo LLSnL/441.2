@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <iostream>
 
 class Edge {
 	size_t size;
