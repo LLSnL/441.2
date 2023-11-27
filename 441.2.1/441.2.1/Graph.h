@@ -28,8 +28,8 @@ public:
 	void printG(); // Вывод графа в виде матрицы смежности
 
 	Graph(const Graph& other) = default;
-	Graph& operator = (const Graph & other) = default;
-	Graph(Graph && other) noexcept = default;
-	Graph& operator = (Graph && other) noexcept = default;
+	Graph& operator = (const Graph& other) = default;
+	Graph(Graph&& other) noexcept = default;
+	Graph& operator = (Graph&& other) noexcept = default;
 	~Graph() = default;
 };
