@@ -4,6 +4,9 @@
 
 #include <iostream>
 
+/*
+* @brief Класс граф - содержит информацию о графе, представленную в виде таблицы смежности и количества узлов графа. Матрица смежности выполнена как вектор векторов Edge.
+*/
 class Graph {
 private:
 	std::vector<std::vector<Edge>> adjacencyMatrix;
@@ -14,6 +17,9 @@ private:
 	static void getPath(size_t from, size_t to, std::vector<size_t> parents, std::vector<size_t>& paths);
 
 public:
+	/*
+	* @brief Конструктор по умолчанию. Создает граф, содержащий 
+	*/
 	Graph();
 	Graph(std::vector<std::vector<Edge>> adjacencyMatrix, size_t nodeCount);
 	void addNode(std::vector<Edge> connections);
@@ -25,7 +31,7 @@ public:
 
 	bool ivenAlgorithm(size_t m);
 
-	void printG(); // Вывод графа в виде матрицы смежности
+	void printG(); // Вывод графа в виде матрицы
 
 	Graph(const Graph& other) = default;
 	Graph& operator = (const Graph& other) = default;

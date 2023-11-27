@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 
+/*
+* @brief Класс ребро - содержит информацию о ребре графа (присутствие/отсутствие ребра, его длину)
+*/
 class Edge {
 	size_t size;
 public:

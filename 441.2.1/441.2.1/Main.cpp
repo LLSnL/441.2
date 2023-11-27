@@ -1,6 +1,14 @@
 #include "Graph.h"
 
+/*
+* @brief Точка входа в программу.
+*/
 int main(){
+	Graph b = Graph();
+	std::vector<Edge> y = { 0 };
+	b.addNode(y);
+	b.printG();
+
 	std::vector<std::vector<Edge>> x = { 
 		{0, 1, 1, 0, 0, 1}, 
 		{1, 0, 1, 0, 1, 0}, 
