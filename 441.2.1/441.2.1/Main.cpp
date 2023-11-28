@@ -4,20 +4,20 @@
 * @brief Точка входа в программу.
 */
 int main(){
-	Graph b = Graph();
-	std::vector<Edge> y = { 0 };
+	Graph<size_t> b = Graph<size_t>();
+	std::vector<Edge<size_t>> y = { 0 };
 	b.addNode(y);
 	b.printG();
 
-	std::vector<std::vector<Edge>> x = { 
-		{0, 1, 1, 0, 0, 1}, 
+	std::vector<std::vector<Edge<size_t>>> x = { 
+		{0, 1, 2, 0, 0, 4}, 
 		{1, 0, 1, 0, 1, 0}, 
-		{1, 1, 0, 1, 0, 0}, 
-		{0, 0, 1, 0, 1, 1}, 
+		{2, 1, 0, 3, 0, 0}, 
+		{0, 0, 3, 0, 1, 1}, 
 		{0, 1, 0, 1, 0, 1}, 
-		{1, 0, 0, 1, 1, 0} 
+		{4, 0, 0, 1, 1, 0} 
 	};
-	Graph a = Graph(x, 6);
+	Graph<size_t> a = Graph<size_t>(x, 6);
 	a.printG();
 	size_t m;
 	std::cout << std::endl;
