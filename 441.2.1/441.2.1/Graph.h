@@ -1,7 +1,7 @@
 #pragma once
 #include "Edge.h"
 #include <list>
-#include <exception>
+#include <stdexcept>
 /*
 * @brief Класс граф - содержит информацию о графе, представленную в виде таблицы смежности и количества узлов графа. Матрица смежности выполнена как вектор векторов Edge.
 */
@@ -69,7 +69,7 @@ template <typename T>
 void Graph<T>::addNode(const std::vector<Edge<T>> connections) {
 	++this->nodeCount;
 	if (connections.size() != this->getNodeCount())
-		throw std::exception("Размеры массива, определяющего связи узла не совпадают с количеством узлов!");
+		throw std::out_of_range("Размеры массива, определяющего связи узла не совпадают с количеством узлов!");
 	if (this->getNodeCount() == 1) {
 		this->adjacencyMatrix.resize(this->getNodeCount());
 		this->adjacencyMatrix[0].resize(this->getNodeCount());
@@ -89,9 +89,9 @@ void Graph<T>::addNode(const std::vector<Edge<T>> connections) {
 template <typename T>
 void Graph<T>::deleteNode(const size_t nodeNumber) {
 	if (this->getNodeCount() == 0)
-		throw std::exception("Количество узлов графа не должно быть меньше 0!");
+		throw std::out_of_range("Количество узлов графа не должно быть меньше 0!");
 	if (nodeNumber >= this->getNodeCount())
-		throw std::exception("Номер узла превышает количество узлов графа!");
+		throw std::out_of_range("Номер узла превышает количество узлов графа!");
 	--this->nodeCount;
 	for (size_t i = nodeNumber; i < this->getAdjacencyMatrix().size() - 1; i++)
 	{
@@ -114,9 +114,9 @@ void Graph<T>::deleteNode(const size_t nodeNumber) {
 template <typename T>
 void Graph<T>::editNodeConnections(const size_t nodeNumber, const std::vector<Edge<T>> connections) {
 	if (nodeNumber >= this->getNodeCount())
-		throw std::exception("Номер узла превышает количество узлов графа!");
+		throw std::out_of_range("Номер узла превышает количество узлов графа!");
 	if (connections.size() != this->getNodeCount())
-		throw std::exception("Размеры массива, определяющего связи узла не совпадают с количеством узлов!");
+		throw std::out_of_range("Размеры массива, определяющего связи узла не совпадают с количеством узлов!");
 	this->adjacencyMatrix[nodeNumber] = connections;
 	for (size_t i = 0; i < this->getAdjacencyMatrix().size(); i++)
 	{
@@ -248,8 +248,15 @@ bool Graph<T>::ivenAlgorithm(const size_t m) const {
 
 template <typename T>
 std::vector<T> Graph<T>::dejkstraAlgorithm(const size_t nodeNumber) const {
-	if(nodeNumber >= this->getNodeCount())
-
+	if (nodeNumber >= this->getNodeCount())
+		throw std::out_of_range("Номер узла превышает количество узлов в графе!");
 	std::vector<bool> visited = std::vector<bool>(this->getNodeCount());
 	std::vector<T> minPaths = std::vector<T>(this->getNodeCount());
+	for (size_t i = 0; i < this->getNodeCount(); i++)
+	{
+		minPaths[i] = this->getAdjacencyMatrix()[nodeNumber][i];
+		visited[i] = false;
+	}
+	minPaths[nodeNumber] = 0;
+	size_t index, visitedIndex;
 };
