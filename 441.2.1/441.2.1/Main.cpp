@@ -13,7 +13,13 @@ void printG(Graph<T> a);
 int main(){
 	Graph<size_t> b = Graph<size_t>();
 	std::vector<Edge<size_t>> y = { 0 };
+	std::vector<Edge<size_t>> y2 = { 1, 0 };
+	std::vector<Edge<size_t>> y3 = { 0, 0 };
 	b.addNode(y);
+	b.addNode(y2);
+	printG(b);
+	b.editNodeConnections(1, y3);
+	b.deleteNode(0);
 	printG(b);
 	std::vector<std::vector<Edge<size_t>>> x = { 
 		{0, 3, 2, 0, 0, 1}, 
@@ -26,7 +32,6 @@ int main(){
 	Graph<size_t> a = Graph<size_t>(x, 6);
 	printG(a);
 	size_t m;
-	std::cout << std::endl;
 	std::cout << "Enter your m: ";
 	std::cin >> m;
 	
@@ -34,6 +39,9 @@ int main(){
 		std::cout << "The graph's connectivity is at least " << m << std::endl;
 	else
 		std::cout << "The graph's connectivity not " << m << std::endl;
+
+	std::vector<Edge<size_t>> y4 = { 0, 0, 1, 1, 1, 1 };
+	a.editNodeConnections(0, y4);
 	printG(a);
 
 	return 0;
@@ -49,4 +57,5 @@ void printG(Graph<T> a) {
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
