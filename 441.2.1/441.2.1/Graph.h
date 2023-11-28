@@ -5,22 +5,22 @@
 #include <iostream>
 
 /******************************************************************************************************************************************************************************************************
-* Раздельной компиляции шаблонов нет: вы должны включать с помощью директивы #include определения шаблонов в каждую единицу трансляции, которая их использует. (c) A Tour of C++, adv. 7-6. Страуструп*
+* Р Р°Р·РґРµР»СЊРЅРѕР№ РєРѕРјРїРёР»СЏС†РёРё С€Р°Р±Р»РѕРЅРѕРІ РЅРµС‚: РІС‹ РґРѕР»Р¶РЅС‹ РІРєР»СЋС‡Р°С‚СЊ СЃ РїРѕРјРѕС‰СЊСЋ РґРёСЂРµРєС‚РёРІС‹ #include РѕРїСЂРµРґРµР»РµРЅРёСЏ С€Р°Р±Р»РѕРЅРѕРІ РІ РєР°Р¶РґСѓСЋ РµРґРёРЅРёС†Сѓ С‚СЂР°РЅСЃР»СЏС†РёРё, РєРѕС‚РѕСЂР°СЏ РёС… РёСЃРїРѕР»СЊР·СѓРµС‚. (c) A Tour of C++, adv. 7-6. РЎС‚СЂР°СѓСЃС‚СЂСѓРї*
 *******************************************************************************************************************************************************************************************************/
 
 /*
-* @brief Класс граф - содержит информацию о графе, представленную в виде таблицы смежности и количества узлов графа. Матрица смежности выполнена как вектор векторов Edge.
+* @brief РљР»Р°СЃСЃ РіСЂР°С„ - СЃРѕРґРµСЂР¶РёС‚ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РіСЂР°С„Рµ, РїСЂРµРґСЃС‚Р°РІР»РµРЅРЅСѓСЋ РІ РІРёРґРµ С‚Р°Р±Р»РёС†С‹ СЃРјРµР¶РЅРѕСЃС‚Рё Рё РєРѕР»РёС‡РµСЃС‚РІР° СѓР·Р»РѕРІ РіСЂР°С„Р°. РњР°С‚СЂРёС†Р° СЃРјРµР¶РЅРѕСЃС‚Рё РІС‹РїРѕР»РЅРµРЅР° РєР°Рє РІРµРєС‚РѕСЂ РІРµРєС‚РѕСЂРѕРІ Edge.
 */
 template <typename T>
 class Graph {
 private:
 	/*
-	* @brief Поле класса Graph, содержащее в себе информацию о графе - его матрицу смежности.
+	* @brief РџРѕР»Рµ РєР»Р°СЃСЃР° Graph, СЃРѕРґРµСЂР¶Р°С‰РµРµ РІ СЃРµР±Рµ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РіСЂР°С„Рµ - РµРіРѕ РјР°С‚СЂРёС†Сѓ СЃРјРµР¶РЅРѕСЃС‚Рё.
 	*/
 	std::vector<std::vector<Edge<T>>> adjacencyMatrix;
 
 	/*
-	* @brief Поле класса Graph, содержащее в себе информацию о графе - количество узлов в нём.
+	* @brief РџРѕР»Рµ РєР»Р°СЃСЃР° Graph, СЃРѕРґРµСЂР¶Р°С‰РµРµ РІ СЃРµР±Рµ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РіСЂР°С„Рµ - РєРѕР»РёС‡РµСЃС‚РІРѕ СѓР·Р»РѕРІ РІ РЅС‘Рј.
 	*/
 	size_t nodeCount;
 
@@ -30,14 +30,14 @@ private:
 
 public:
 	/*
-	* @brief Конструктор по умолчанию. Создает граф, содержащий вектор векторов из 0 элементов. nodeCount(кол-во узлов) = 0.
+	* @brief РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ. РЎРѕР·РґР°РµС‚ РіСЂР°С„, СЃРѕРґРµСЂР¶Р°С‰РёР№ РІРµРєС‚РѕСЂ РІРµРєС‚РѕСЂРѕРІ РёР· 0 СЌР»РµРјРµРЅС‚РѕРІ. nodeCount(РєРѕР»-РІРѕ СѓР·Р»РѕРІ) = 0.
 	*/
 	Graph();
 
 	/*
-	* @brief Конструктор с параметрами.
-	* @param adjacencyMatrix - матрица смежности, представленная вектором векторов Edge.
-	* @param nodeCount - количество узлов графа.
+	* @brief РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё.
+	* @param adjacencyMatrix - РјР°С‚СЂРёС†Р° СЃРјРµР¶РЅРѕСЃС‚Рё, РїСЂРµРґСЃС‚Р°РІР»РµРЅРЅР°СЏ РІРµРєС‚РѕСЂРѕРј РІРµРєС‚РѕСЂРѕРІ Edge.
+	* @param nodeCount - РєРѕР»РёС‡РµСЃС‚РІРѕ СѓР·Р»РѕРІ РіСЂР°С„Р°.
 	*/
 	Graph(std::vector<std::vector<Edge<T>>> adjacencyMatrix, size_t nodeCount);
 
@@ -51,7 +51,7 @@ public:
 
 	bool ivenAlgorithm(size_t m);
 
-	void printG(); // Вывод графа в виде матрицы - удалить после
+	void printG(); // Р’С‹РІРѕРґ РіСЂР°С„Р° РІ РІРёРґРµ РјР°С‚СЂРёС†С‹ - СѓРґР°Р»РёС‚СЊ РїРѕСЃР»Рµ
 
 	Graph(const Graph& other) = default;
 	Graph& operator = (const Graph& other) = default;
@@ -59,7 +59,6 @@ public:
 	Graph& operator = (Graph&& other) noexcept = default;
 	~Graph() = default;
 };
-
 
 
 template <typename T>
@@ -72,7 +71,7 @@ template <typename T>
 void Graph<T>::addNode(std::vector<Edge<T>> connections) {
 	++this->nodeCount;
 	if (connections.size() != nodeCount)
-		throw std::exception("Размеры массива, определяющего связи узла не совпадают с количеством узлов!");
+		throw std::exception("Р Р°Р·РјРµСЂС‹ РјР°СЃСЃРёРІР°, РѕРїСЂРµРґРµР»СЏСЋС‰РµРіРѕ СЃРІСЏР·Рё СѓР·Р»Р° РЅРµ СЃРѕРІРїР°РґР°СЋС‚ СЃ РєРѕР»РёС‡РµСЃС‚РІРѕРј СѓР·Р»РѕРІ!");
 	if (this->nodeCount == 1) {
 		this->adjacencyMatrix.resize(nodeCount);
 		this->adjacencyMatrix[0].resize(nodeCount);
@@ -92,9 +91,9 @@ void Graph<T>::addNode(std::vector<Edge<T>> connections) {
 template <typename T>
 void Graph<T>::deleteNode(size_t nodeNumber) {
 	if (this->nodeCount == 0)
-		throw std::exception("Количество узлов графа не должно быть меньше 0!");
+		throw std::exception("РљРѕР»РёС‡РµСЃС‚РІРѕ СѓР·Р»РѕРІ РіСЂР°С„Р° РЅРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РјРµРЅСЊС€Рµ 0!");
 	if (nodeNumber >= nodeCount)
-		throw std::exception("Номер узла превышает количество узлов графа!");
+		throw std::exception("РќРѕРјРµСЂ СѓР·Р»Р° РїСЂРµРІС‹С€Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СѓР·Р»РѕРІ РіСЂР°С„Р°!");
 	--this->nodeCount;
 	for (size_t i = nodeNumber; i < this->adjacencyMatrix.size() - 1; i++)
 	{
@@ -117,9 +116,9 @@ void Graph<T>::deleteNode(size_t nodeNumber) {
 template <typename T>
 void Graph<T>::editNodeConnections(size_t nodeNumber, std::vector<Edge<T>> connections) {
 	if (nodeNumber >= nodeCount)
-		throw std::exception("Номер узла превышает количество узлов графа!");
+		throw std::exception("РќРѕРјРµСЂ СѓР·Р»Р° РїСЂРµРІС‹С€Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СѓР·Р»РѕРІ РіСЂР°С„Р°!");
 	if (connections.size() != nodeCount)
-		throw std::exception("Размеры массива, определяющего связи узла не совпадают с количеством узлов!");
+		throw std::exception("Р Р°Р·РјРµСЂС‹ РјР°СЃСЃРёРІР°, РѕРїСЂРµРґРµР»СЏСЋС‰РµРіРѕ СЃРІСЏР·Рё СѓР·Р»Р° РЅРµ СЃРѕРІРїР°РґР°СЋС‚ СЃ РєРѕР»РёС‡РµСЃС‚РІРѕРј СѓР·Р»РѕРІ!");
 	this->adjacencyMatrix[nodeNumber] = connections;
 	for (size_t i = 0; i < this->adjacencyMatrix.size(); i++)
 	{
@@ -170,7 +169,7 @@ void Graph<T>::getPath(size_t from, size_t to, std::vector<size_t> parents, std:
 		paths.push_back(to);
 		return;
 	}
-	int preform = parents[to];
+	size_t preform = parents[to];
 	getPath(from, preform, parents, paths);
 
 	paths.push_back(to);
@@ -247,7 +246,7 @@ bool Graph<T>::ivenAlgorithm(size_t m) {
 	return true;
 };
 
-//Удалить после - вывод на экран
+//РЈРґР°Р»РёС‚СЊ РїРѕСЃР»Рµ - РІС‹РІРѕРґ РЅР° СЌРєСЂР°РЅ
 template <typename T>
 void Graph<T>::printG() {
 	for (size_t i = 0;i < this->adjacencyMatrix.size(); ++i)

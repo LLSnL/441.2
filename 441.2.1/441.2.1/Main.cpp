@@ -1,7 +1,7 @@
 #include "Graph.h"
 
 /*
-* @brief Точка входа в программу.
+* @brief РўРѕС‡РєР° РІС…РѕРґР° РІ РїСЂРѕРіСЂР°РјРјСѓ.
 */
 int main(){
 	Graph<size_t> b = Graph<size_t>();
