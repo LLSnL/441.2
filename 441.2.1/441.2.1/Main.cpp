@@ -8,7 +8,6 @@ int main(){
 	std::vector<Edge<size_t>> y = { 0 };
 	b.addNode(y);
 	b.printG();
-
 	std::vector<std::vector<Edge<size_t>>> x = { 
 		{0, 1, 2, 0, 0, 4}, 
 		{1, 0, 1, 0, 1, 0}, 

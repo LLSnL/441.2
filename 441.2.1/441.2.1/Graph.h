@@ -15,12 +15,12 @@ template <typename T>
 class Graph {
 private:
 	/*
-	* @brief Поле класса Graph, содержащее в себе информацию о графе в виде матрицы смежности.
+	* @brief Поле класса Graph, содержащее в себе информацию о графе - его матрицу смежности.
 	*/
 	std::vector<std::vector<Edge<T>>> adjacencyMatrix;
 
 	/*
-	* 
+	* @brief Поле класса Graph, содержащее в себе информацию о графе - количество узлов в нём.
 	*/
 	size_t nodeCount;
 
