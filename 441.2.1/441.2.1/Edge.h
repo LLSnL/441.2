@@ -9,9 +9,9 @@ class Edge {
 	T size;
 public:
 	Edge();
-	Edge(T size);
-	void setInfo(T newSize);
-	T getInfo();
+	Edge(const T size);
+	void setInfo(const T newSize);
+	T getInfo() const;
 
 	Edge(const Edge& other) = default;
 	Edge& operator = (const Edge& other) = default;
@@ -25,14 +25,14 @@ template <typename T>
 Edge<T>::Edge() : size(NULL) {};
 
 template <typename T>
-Edge<T>::Edge(T size) : size(size) {};
+Edge<T>::Edge(const T size) : size(size) {};
 
 template <typename T>
-void Edge<T>::setInfo(T newSize) {
+void Edge<T>::setInfo(const T newSize) {
 	this->size = newSize;
 };
 
 template <typename T>
-T Edge<T>::getInfo() {
+T Edge<T>::getInfo() const {
 	return this->size;
 };
