@@ -49,7 +49,7 @@ public:
 	size_t getNodeCount() const;
 
 	bool ivenAlgorithm(const size_t m) const;
-	std::vector<T> dejkstraAlgorithm(const size_t nodeNumber) const;
+	std::vector<Edge<T>> dejkstraAlgorithm(const size_t nodeNumber) const;
 
 	Graph(const Graph& other) = default;
 	Graph& operator = (const Graph& other) = default;
@@ -247,16 +247,64 @@ bool Graph<T>::ivenAlgorithm(const size_t m) const {
 };
 
 template <typename T>
-std::vector<T> Graph<T>::dejkstraAlgorithm(const size_t nodeNumber) const {
+std::vector<Edge<T>> Graph<T>::dejkstraAlgorithm(const size_t nodeNumber) const {
 	if (nodeNumber >= this->getNodeCount())
 		throw std::out_of_range("Номер узла превышает количество узлов в графе!");
-	std::vector<bool> visited = std::vector<bool>(this->getNodeCount());
-	std::vector<T> minPaths = std::vector<T>(this->getNodeCount());
 	for (size_t i = 0; i < this->getNodeCount(); i++)
 	{
-		minPaths[i] = this->getAdjacencyMatrix()[nodeNumber][i];
-		visited[i] = false;
+		for (size_t j = 0; j < this->getNodeCount(); j++) {
+			if (this->getAdjacencyMatrix()[i][j].getInfo() < 0)
+				throw std::out_of_range("В графе присутствуют дуги с отрицательным весом!");
+		}
 	}
-	minPaths[nodeNumber] = 0;
-	size_t index, visitedIndex;
+	
+	std::vector<bool> visitedNodes = std::vector<bool>(this->getNodeCount());
+	std::vector<Edge<T>> minPaths;
+	std::list<size_t> indexBuffer;
+	size_t k, index = 0;
+	std::list<T> minimalBuffer;
+	T minimal;
+
+	for (size_t i = 0; i < this->getNodeCount(); i++)
+	{
+		minPaths.push_back(this->getAdjacencyMatrix()[nodeNumber][i]);
+		visitedNodes[i] = false;
+	}
+	minPaths[nodeNumber].setInfo(false);
+	visitedNodes[nodeNumber] = true;
+
+	while (true) {
+		k = 0;
+		for (size_t i = 0; i < visitedNodes.size(); i++)
+		{
+			if (visitedNodes[i])
+				++k;
+		}
+		if (k == visitedNodes.size())
+			break;
+
+		for (size_t i = 0; i < this->getNodeCount(); i++)
+		{
+			if (!visitedNodes[i] && minPaths[i].getInfo() != false) {
+				minimalBuffer.push_back(minPaths[i].getInfo());
+				indexBuffer.push_back(i);
+			}
+		}
+		while (!indexBuffer.empty()) {
+			index = indexBuffer.back();
+			minimal = minimalBuffer.back();
+			indexBuffer.pop_back();
+			minimalBuffer.pop_back();
+			for (size_t i = 0; i < this->getNodeCount(); i++)
+			{
+				if (!visitedNodes[i] && minPaths[i].getInfo() == false && this->getAdjacencyMatrix()[index][i].getInfo() != false)
+					minPaths[i].setInfo(minimal + this->getAdjacencyMatrix()[index][i].getInfo());
+				if (!visitedNodes[i] && this->getAdjacencyMatrix()[index][i].getInfo() != false && minPaths[i].getInfo() > (minimal + this->getAdjacencyMatrix()[index][i].getInfo()))
+					minPaths[i].setInfo(minimal + this->getAdjacencyMatrix()[index][i].getInfo());
+			}
+		}
+		visitedNodes[index] = true;
+	}
+
+	return minPaths;
 };
