@@ -31,14 +31,14 @@ int main(){
 	};
 	Graph<size_t> a = Graph<size_t>(x, 6);
 	printG(a);
-	//size_t m;
-	//std::cout << "Enter your m: ";
-	//std::cin >> m;
-	//
-	//if (a.ivenAlgorithm(m))
-	//	std::cout << "The graph's connectivity is at least " << m << std::endl;
-	//else
-	//	std::cout << "The graph's connectivity not " << m << std::endl;
+	size_t m;
+	std::cout << "Enter your m: ";
+	std::cin >> m;
+	
+	if (a.ivenAlgorithm(m))
+		std::cout << "The graph's connectivity is at least " << m << std::endl;
+	else
+		std::cout << "The graph's connectivity not " << m << std::endl;
 
 	auto z = a.dejkstraAlgorithm(0);
 

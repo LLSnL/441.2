@@ -18,13 +18,34 @@ private:
 	*/
 	size_t nodeCount;
 
-
+	/*
+	* @brief Статический вспомогательный метод для работы метода ivenAlgorithm. Определяет есть ли путь между двумя узлами графа. В ходе работы  в векторе parents устанавливаются значения для восстановления маршрута.
+	* @param g - граф, в котором нужно найти путь между 2мя узлами.
+	* @param to - номер узла, который является конечной точкой.
+	* @param visited - вектор посещённых узлов. Для корректной работы вводится вектор размер которого совпадает со значением nodeCount графа g, все значения должны быть = false.
+	* @param buffer - буфер, в который помещается номер узла, из которого ищется путь.
+	* @param parents - векто, использующийся для последующего восстановления маршрута. Для корректной работы вводится вектор размер которого совпадает со значением nodeCount графа g, все значения должны быть = 0. 
+	* @return true - если маршрут между узлами существует,
+	* @return false - если нет.
+	*/
 	static bool BFS(Graph<T> g, size_t to, std::vector<bool>& visited, std::list<size_t>& buffer, std::vector<size_t>& parents);
 	
-	
+	/*
+	* @brief Статический вспомогательный метод для работы метода ivenAlgorithm. Ищет маршруты между 2мя узлами графа.
+	* @param g - граф, в котором проводятся расчёты.
+	* @param from - номер узла, который является начальной точкой.
+	* @param to - номер узла, который является конечной точкой.
+	* @return Количество маршрутов с разделёнными узлами.
+	*/
 	static size_t searchUniquePaths(Graph<T> g, size_t from, size_t to);
 	
-	
+	/*
+	* @brief Статический вспомогательный метод для работы метода ivenAlgorithm. Восстанавливает найденный путь между двумя узлами по значениям вектора parents. Путь записывается в вектор paths.
+	* @param from - номер узла, который является начальной точкой.
+	* @param to - номер узла, который является конечной точкой.
+	* @param parents - вектор, с помощью которого восстанавливается маршрут. Для корректной работы вводится вектор, полученный в ходе работы метода BFS.
+	* @param paths - вектор, в который записываются маршруты по порядку. Для корректной работы вводится вектор нулевого размера.
+	*/
 	static void getPath(size_t from, size_t to, std::vector<size_t> parents, std::vector<size_t>& paths);
 
 public:
@@ -40,21 +61,75 @@ public:
 	*/
 	Graph(const std::vector<std::vector<Edge<T>>> adjacencyMatrix, const size_t nodeCount);
 
-
+	/*
+	* @brief Метод, позволяющий добавить узел в граф. Узел добавляется в конец (номер нового узла = nodeCount).
+	* @param connections - вектор, содержащий инфомацию о рёбрах нового узла.
+	*/
 	void addNode(const std::vector<Edge<T>> connections);
+
+	/*
+	* @brief Метод, позволяющий удалить узел из графа.
+	* @param nodeNumber - номер узла, который необходимо удалить.
+	*/
 	void deleteNode(const size_t nodeNumber);
+
+	/*
+	* @brief Метод, позволяющий отредактировать связи конкретного узла в графе
+	* @param nodeNumber - номер узла, в котором необходимо поменять связи.
+	* @param connections - вектор, содержащий инфомацию о рёбрах изменённого узла.
+	*/
 	void editNodeConnections(const size_t nodeNumber, const std::vector<Edge<T>> connections);
 
+	/*
+	* @brief Геттер adjacencyMatrix.
+	* @return Матрица смежности графа в виде вектора векторов Edge.
+	*/
 	std::vector<std::vector<Edge<T>>> getAdjacencyMatrix() const;
+
+	/*
+	* @brief Геттер nodeCount.
+	* @return Количество узлов в графе.
+	*/
 	size_t getNodeCount() const;
 
+	/*
+	* @brief Метод, реализующий работу алгоритма Ивена для оценки связности сети.
+	* @param m - коэффициент связности, который необходимо проверить.
+	* @return true - если связность графа равна по крайней мере m,
+	* @return false - если связность меньше m.
+	*/
 	bool ivenAlgorithm(const size_t m) const;
+
+	/*
+	* @brief Метод, реализующий работу алгоритма Дейкстры.
+	* @param nodeNumber - узел, который является начальной точкой для поиска маршрутов
+	* @return Вектор Edge, содержащий значения кратчайших путей из узла nodeNumber до каждого из узлов по очереди.
+	*/
 	std::vector<Edge<T>> dejkstraAlgorithm(const size_t nodeNumber) const;
 
+	/*
+	* @brief Конструктор копирования
+	*/
 	Graph(const Graph& other) = default;
+
+	/*
+	* @brief Оператор копирования
+	*/
 	Graph& operator = (const Graph& other) = default;
+
+	/*
+	* @brief Конструктор перемещения
+	*/
 	Graph(Graph&& other) noexcept = default;
+
+	/*
+	* @brief Оператор перемещения
+	*/
 	Graph& operator = (Graph&& other) noexcept = default;
+
+	/*
+	* @brief Деструктор
+	*/
 	~Graph() = default;
 };
 
