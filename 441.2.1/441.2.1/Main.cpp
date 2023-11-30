@@ -12,6 +12,7 @@ void printG(Graph<T> a);
 */
 int main(){
 	Graph<size_t> b = Graph<size_t>();
+	auto f = b.getAdjacencyMatrix();
 	std::vector<Edge<size_t>> y = { 0 };
 	std::vector<Edge<size_t>> y2 = { 1, 0 };
 	std::vector<Edge<size_t>> y3 = { 0, 0 };
