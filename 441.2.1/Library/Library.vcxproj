@@ -131,10 +131,6 @@
     <ClInclude Include="..\441.2.1\Edge.h" />
     <ClInclude Include="..\441.2.1\Graph.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\441.2.1\Edge.cpp" />
-    <ClCompile Include="..\441.2.1\Graph.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

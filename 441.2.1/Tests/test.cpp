@@ -87,9 +87,13 @@ namespace ClasesTests{
 			{0, 1, 2, 3, 4}
 		};
 		std::vector<std::vector<Edge<size_t>>> xr2 = {
-			{1}
+			{-4}
 		};
-		size_t yr1 = 4, yr2 = 2;
+		std::vector<std::vector<Edge<int>>> xr3 = {
+			{0, -2},
+			{-2, -4}
+		};
+		size_t yr1 = 4, yr2 = 2, yr3 = 2;
 		std::vector<std::vector<Edge<bool>>> x1 = {
 			{false, true, true, false, false, true},
 			{true, false, true, false, true, false},
@@ -131,6 +135,7 @@ namespace ClasesTests{
 		Graph<float> g5 = Graph<float>(x5, y5);
 		Graph<size_t> g6 = Graph<size_t>();
 		Graph<float> g7 = Graph<float>();
+		Graph<int> gr1 = Graph<int>(xr3, yr3);
 	};
 	TEST_F(GraphTest, DefaultConstructorWorks) {
 		EXPECT_EQ(g6.getAdjacencyMatrix().size(), 0);
@@ -244,22 +249,67 @@ namespace ClasesTests{
 	}
 
 	TEST_F(GraphTest, IvenAlgorithmWorks) {
-		//EXPECT_NO_FATAL_FAILURE(g5.ivenAlgorithm(2));
-		//EXPECT_FALSE(g5.ivenAlgorithm(2));
+		EXPECT_FALSE(g7.ivenAlgorithm(1));
+		EXPECT_FALSE(g5.ivenAlgorithm(2));
 
-		//for (size_t i = 0; i < g1.getNodeCount(); i++)
-		//{
-		//	if (i < 4) {
-		//		EXPECT_TRUE(g1.ivenAlgorithm(i));
-		//	}
-		//	else {
-		//		EXPECT_FALSE(g1.ivenAlgorithm(i));
-		//	}
-		//	EXPECT_EQ(g1.ivenAlgorithm(i), g2.ivenAlgorithm(i));
-		//}
+		for (size_t i = 0; i < g1.getNodeCount(); i++)
+		{
+			if (i < 4) {
+				EXPECT_TRUE(g1.ivenAlgorithm(i));
+			}
+			else {
+				EXPECT_FALSE(g1.ivenAlgorithm(i));
+			}
+			EXPECT_EQ(g1.ivenAlgorithm(i), g2.ivenAlgorithm(i));
+		}
+
+		EXPECT_TRUE(g3.ivenAlgorithm(2));
+		EXPECT_TRUE(g4.ivenAlgorithm(2));
+		EXPECT_FALSE(g3.ivenAlgorithm(3));
+		EXPECT_FALSE(g4.ivenAlgorithm(3));
+
+		EXPECT_TRUE(gr1.ivenAlgorithm(1));
+		EXPECT_FALSE(gr1.ivenAlgorithm(2));
 	}
 
 	TEST_F(GraphTest, DejkstraAlgorithmWorks) {
+		std::vector<Edge<size_t>> pg20 = { 0, 3, 2, 5, 3, 1 };
+		std::vector<Edge<size_t>> pg22 = { 2, 5, 0, 3, 5, 3 };
+		std::vector<Edge<size_t>> pg30 = { 0, 7, 9, 20, 20, 11 };
+		std::vector<Edge<size_t>> pg32 = { 9, 10, 0, 11, 11, 2 };
+		std::vector<Edge<size_t>> pg34 = { 20, 21, 11, 6, 0, 9 };
+		std::vector<Edge<size_t>> pg40 = { 0, 1, 7, 5 };
+		std::vector<Edge<size_t>> pg43 = { 5, 6, 2, 0 };
+		std::vector<Edge<float>> pg50 = { 0 };
 
+
+		std::vector<Edge<size_t>> pgt20 = g2.dejkstraAlgorithm(0);
+		std::vector<Edge<size_t>> pgt22 = g2.dejkstraAlgorithm(2);
+		std::vector<Edge<size_t>> pgt30 = g3.dejkstraAlgorithm(0);
+		std::vector<Edge<size_t>> pgt32 = g3.dejkstraAlgorithm(2);
+		std::vector<Edge<size_t>> pgt34 = g3.dejkstraAlgorithm(4);
+		std::vector<Edge<size_t>> pgt40 = g4.dejkstraAlgorithm(0);
+		std::vector<Edge<size_t>> pgt43 = g4.dejkstraAlgorithm(3);
+		std::vector<Edge<float>> pgt50 = g5.dejkstraAlgorithm(0);
+
+		EXPECT_THROW(g7.dejkstraAlgorithm(0), std::logic_error);
+		EXPECT_THROW(g5.dejkstraAlgorithm(2), std::out_of_range);
+		EXPECT_THROW(gr1.dejkstraAlgorithm(1), std::logic_error);
+		EXPECT_THROW(g1.dejkstraAlgorithm(3), std::logic_error);
+
+		for (size_t i = 0; i < g2.getNodeCount(); i++)
+		{
+			EXPECT_EQ(pgt20[i].getInfo(), pg20[i].getInfo());
+			EXPECT_EQ(pgt22[i].getInfo(), pg22[i].getInfo());
+			EXPECT_EQ(pgt30[i].getInfo(), pg30[i].getInfo());
+			EXPECT_EQ(pgt32[i].getInfo(), pg32[i].getInfo());
+			EXPECT_EQ(pgt34[i].getInfo(), pg34[i].getInfo());
+		}
+		for (size_t i = 0; i < g4.getNodeCount(); i++)
+		{
+			EXPECT_EQ(pgt40[i].getInfo(), pg40[i].getInfo());
+			EXPECT_EQ(pgt43[i].getInfo(), pg43[i].getInfo());
+		}
+		EXPECT_FLOAT_EQ(pgt50[0].getInfo(), pg50[0].getInfo());
 	}
 }

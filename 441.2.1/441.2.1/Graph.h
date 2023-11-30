@@ -305,6 +305,8 @@ template <typename T>
 bool Graph<T>::ivenAlgorithm(const size_t m) const {
 	if (m >= this->getNodeCount())
 		return false;
+	if (m == 0)
+		return true;
 	Graph<T> newGraph = Graph<T>(this->getAdjacencyMatrix(), this->getNodeCount());
 	for (size_t i = 0; i < m - 1; i++)
 	{
@@ -335,6 +337,10 @@ bool Graph<T>::ivenAlgorithm(const size_t m) const {
 
 template <typename T>
 std::vector<Edge<T>> Graph<T>::dejkstraAlgorithm(const size_t nodeNumber) const {
+	if (typeid(T) == typeid(bool))
+		throw std::logic_error("Алгоритм не работает с булевыми переменными!");
+	if (this->getNodeCount() == 0)
+		throw std::logic_error("Нельзя посчитать пути в графе без узлов!");
 	if (nodeNumber >= this->getNodeCount())
 		throw std::out_of_range("Номер узла превышает количество узлов в графе!");
 	for (size_t i = 0; i < this->getNodeCount(); i++)
