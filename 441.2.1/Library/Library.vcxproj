@@ -128,8 +128,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\441.2.1\Edge.h" />
     <ClInclude Include="..\441.2.1\Graph.h" />
+    <ClInclude Include="CheckForGraphConnectivity.h" />
+    <ClInclude Include="CheckForGraphConnectivityStrategy.h" />
+    <ClInclude Include="DejkstraAlgorithm.h" />
+    <ClInclude Include="FindMinimalPathToNodesStrategy.h" />
+    <ClInclude Include="KleitmanAlgorithm.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FindMinimalPathToNodes.h" />
+    <ClCompile Include="IvenAlgorithm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
