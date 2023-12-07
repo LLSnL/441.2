@@ -1,6 +1,6 @@
 #pragma once
 #include "../Library/CheckForGraphConnectivityStrategy.h"
-
+#include <list>
 /*
 * @brief Класс - конкретная реализация алгоритма проверки графа на связность - реализация алгоритма Ивена.
 */
@@ -119,6 +119,8 @@ template <typename T>
 size_t IvenAlgorithm<T>::searchUniquePaths(Graph<T> g, size_t from, size_t to) {
 	size_t k = 0;
 	while (true) {
+		if (from == to)
+			return k;
 		std::list<size_t> buffer;
 		buffer.push_back(from);
 		std::vector<bool> visited(g.getNodeCount());
@@ -129,22 +131,23 @@ size_t IvenAlgorithm<T>::searchUniquePaths(Graph<T> g, size_t from, size_t to) {
 		std::vector<size_t> parents(g.getNodeCount());
 		if (BFS(g, to, visited, buffer, parents) == true) {
 			std::vector<size_t> paths;
-			Graph<T>::getPath(from, to, parents, paths);
+			IvenAlgorithm<T>::getPath(from, to, parents, paths);
 			if (paths.size() == 2) {
 				std::vector<T> newNode = g.getAdjacencyMatrix()[paths[0]];
 				newNode[paths[1]] = 0;
 				g.editNodeConnections(paths[0], newNode);
 			}
 			else {
+				size_t l = 0;
 				for (size_t i = 1; i < paths.size() - 1; i++)
 				{
-					if (paths[i] < to) {
+					if (paths[i] - l < to) {
 						--to;
 					}
-					if (paths[i] < from) {
+					if (paths[i] - l < from) {
 						--from;
 					}
-					g.deleteNode(paths[i]);
+					g.deleteNode(paths[i] - l);
 				}
 			}
 			++k;
@@ -166,7 +169,7 @@ bool IvenAlgorithm<T>::use(Graph<T> a, size_t connectivity) {
 	for (size_t i = 0; i < connectivity - 1; i++)
 	{
 		for (size_t j = i + 1; j < connectivity; j++) {
-			if (IvenAlgorithm::searchUniquePaths(*this, i, j) < connectivity)
+			if (IvenAlgorithm::searchUniquePaths(a, i, j) < connectivity)
 				return false;
 		}
 	}

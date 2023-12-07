@@ -1,6 +1,7 @@
 #pragma once
 #include "../Library/FindMinimalPathToNodesStrategy.h"
 #include <typeinfo>
+#include <list>
 
 template <typename T>
 class DejkstraAlgorithm : public FindMinimalPathToNodesStrategy<T> {
@@ -92,7 +93,6 @@ std::vector<T> DejkstraAlgorithm<T>::use(Graph<T> a, size_t nodeNumber) {
 				indexBuffer.push_back(i);
 			}
 		}
-		//Проверить
 		if (indexBuffer.empty())
 			break;
 		while (!indexBuffer.empty()) {

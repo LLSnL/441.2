@@ -1,5 +1,4 @@
 #pragma once
-#include <list>
 #include <stdexcept>
 #include <vector>
 /*
@@ -100,10 +99,11 @@ Graph<T>::Graph(const std::vector<std::vector<T>> adjacencyMatrix, const size_t 
 		if(adjacencyMatrix[i].size() != nodeCount)
 			throw std::logic_error("Размеры матрицы несовпадают с заявленным количеством узлов!");
 	}
+	double epsilon = 0.00001;
 	for (size_t i = 0; i < nodeCount; i++)
 	{
 		for (size_t j = i; j < nodeCount; j++) {
-			if (adjacencyMatrix[i][j] != adjacencyMatrix[j][i])
+			if ((double)adjacencyMatrix[i][j] - adjacencyMatrix[j][i] > epsilon)
 				throw std::logic_error("Граф должен быть неориентированным!");
 		}
 	}

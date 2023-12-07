@@ -1,5 +1,6 @@
 #pragma once
 #include "../Library/IvenAlgorithm.h"
+#include "../Library/KleitmanAlgorithm.h"
 
 /*
 * @brief Контекст, использующий стратегию для решения задачи проверки графа на связность.
@@ -32,7 +33,7 @@ public:
 	/*
 	* @brief Метод, позволящий использовать выбранную стратегию
 	*/
-	std::vector<T> useStrategy(Graph<T> a, size_t nodeNumber);
+	bool useStrategy(Graph<T> a, size_t connectivity);
 };
 
 
@@ -42,6 +43,6 @@ void CheckForGraphConnectivity<T>::setStrategy(CheckForGraphConnectivityStrategy
 };
 
 template <typename T>
-std::vector<T> CheckForGraphConnectivity<T>::useStrategy(Graph<T> a, size_t nodeNumber) {
+bool CheckForGraphConnectivity<T>::useStrategy(Graph<T> a, size_t nodeNumber) {
 	return this->operation->use(a, nodeNumber);
 };
