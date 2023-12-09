@@ -27,22 +27,28 @@ public:
 
 	/*
 	* @brief Метод для установки стратегии.
+	* @param s - ссылка на стратегию, которую мы хотим выбрать.
 	*/
 	void setStrategy(CheckForGraphConnectivityStrategy<T>* s);
 
 	/*
-	* @brief Метод, позволящий использовать выбранную стратегию
+	* @brief Метод, позволящий использовать выбранную стратегию.
+	* @param graph - граф, для которого применяется стратегия.
+	* @param connectivity - связность, которую необходимо проверить.
+	* @return true - если связность равна по крайней мере параметру connectivity, false - если нет.
 	*/
-	bool useStrategy(Graph<T> a, size_t connectivity);
+	bool useStrategy(Graph<T> graph, size_t connectivity);
 };
 
 
 template <typename T>
 void CheckForGraphConnectivity<T>::setStrategy(CheckForGraphConnectivityStrategy<T>* s) {
+	if (s == nullptr)
+		throw std::logic_error("Стратегия не должна отсутствовать!");
 	operation = s;
 };
 
 template <typename T>
-bool CheckForGraphConnectivity<T>::useStrategy(Graph<T> a, size_t nodeNumber) {
-	return this->operation->use(a, nodeNumber);
+bool CheckForGraphConnectivity<T>::useStrategy(Graph<T> graph, size_t nodeNumber) {
+	return this->operation->use(graph, nodeNumber);
 };
