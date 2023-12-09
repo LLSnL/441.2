@@ -23,21 +23,27 @@ public:
 
 	/*
 	* @brief Метод для установки стратегии.
+	* @param s - стратегия, которую нужно задать.
 	*/
 	void setStrategy(FindMinimalPathToNodesStrategy<T>* s);
 
 	/*
-	* @brief Метод, позволящий использовать выбранную стратегию
+	* @brief Метод, позволящий использовать выбранную стратегию.
+	* @param graph - граф, для которого применяется стратегия.
+	* @param nodeNumber - узел, из котрого ищутся пути.
+	* @return вектор минимальных длин путей до каждого из узлов.
 	*/
-	std::vector<T> useStrategy(Graph<T> a, size_t nodeNumber);
+	std::vector<T> useStrategy(Graph<T> graph, size_t nodeNumber);
 };
 
 template <typename T>
 void FindMinimalPathToNodes<T>::setStrategy(FindMinimalPathToNodesStrategy<T>* s) {
+	if(s == nullptr)
+		throw std::logic_error("Стратегия не должна отсутствовать!");
 	operation = s;
 };
 
 template <typename T>
-std::vector<T> FindMinimalPathToNodes<T>::useStrategy(Graph<T> a, size_t nodeNumber) {
-	return this->operation->use(a, nodeNumber);
+std::vector<T> FindMinimalPathToNodes<T>::useStrategy(Graph<T> graph, size_t nodeNumber) {
+	return this->operation->use(graph, nodeNumber);
 };

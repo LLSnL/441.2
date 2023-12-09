@@ -5,9 +5,9 @@
 * @brief Класс - конкретная реализация алгоритма проверки графа на связность - реализация алгоритма Клейтмана.
 */
 template <typename T>
-class KleitmanAlgorithm : public CheckForGraphConnectivityStrategy<T> {
+class KleitmanAlgorithm : public CheckForGraphConnectivityStrategy<T>{
 	/*
-	* @brief Статический вспомогательный метод для работы метода use класса KleitmanAlgorithm. Определяет есть ли путь между двумя узлами графа. В ходе работы  в векторе parents устанавливаются значения для восстановления маршрута.
+	* @brief Вспомогательный метод для работы метода use класса KleitmanAlgorithm. Определяет есть ли путь между двумя узлами графа. В ходе работы  в векторе parents устанавливаются значения для восстановления маршрута.
 	* @param g - граф, в котором нужно найти путь между 2мя узлами.
 	* @param to - номер узла, который является конечной точкой.
 	* @param visited - вектор посещённых узлов. Для корректной работы вводится вектор размер которого совпадает со значением nodeCount графа g, все значения должны быть = false.
@@ -16,34 +16,34 @@ class KleitmanAlgorithm : public CheckForGraphConnectivityStrategy<T> {
 	* @return true - если маршрут между узлами существует,
 	* @return false - если нет.
 	*/
-	static bool BFS(Graph<T> g, size_t to, std::vector<bool>& visited, std::list<size_t>& buffer, std::vector<size_t>& parents);
+	bool BFS(Graph<T> g, size_t to, std::vector<bool>& visited, std::list<size_t>& buffer, std::vector<size_t>& parents);
 
 	/*
-	* @brief Статический вспомогательный метод для работы метода use класса KleitmanAlgorithm. Ищет маршруты между 2мя узлами графа.
+	* @brief Вспомогательный метод для работы метода use класса KleitmanAlgorithm. Ищет маршруты между 2мя узлами графа.
 	* @param g - граф, в котором проводятся расчёты.
 	* @param from - номер узла, который является начальной точкой.
 	* @param to - номер узла, который является конечной точкой.
 	* @return Количество маршрутов с разделёнными узлами.
 	*/
-	static size_t searchUniquePaths(Graph<T> g, size_t from, size_t to);
+	size_t searchUniquePaths(Graph<T> g, size_t from, size_t to);
 
 	/*
-	* @brief Статический вспомогательный метод для работы метода use класса KleitmanAlgorithm. Восстанавливает найденный путь между двумя узлами по значениям вектора parents. Путь записывается в вектор paths.
+	* @brief Вспомогательный метод для работы метода use класса KleitmanAlgorithm. Восстанавливает найденный путь между двумя узлами по значениям вектора parents. Путь записывается в вектор paths.
 	* @param from - номер узла, который является начальной точкой.
 	* @param to - номер узла, который является конечной точкой.
 	* @param parents - вектор, с помощью которого восстанавливается маршрут. Для корректной работы вводится вектор, полученный в ходе работы метода use класса BFS.
 	* @param paths - вектор, в который записываются маршруты по порядку. Для корректной работы вводится вектор нулевого размера.
 	*/
-	static void getPath(size_t from, size_t to, std::vector<size_t> parents, std::vector<size_t>& paths);
+	void getPath(size_t from, size_t to, std::vector<size_t> parents, std::vector<size_t>& paths);
 public:
 	/*
 	* @brief Переопределение метода use для оценки связности графа. Использование алгоритма Клейтмана.
-	* @param a - граф, в котором нужно оценить коэффициент связности.
+	* @param graph - граф, в котором нужно оценить коэффициент связности.
 	* @param m - коэффициент связности, который необходимо проверить.
 	* @return true - если связность графа равна по крайней мере m,
 	* @return false - если связность меньше m.
 	*/
-	bool use(Graph<T> a, size_t connectivity) override;
+	bool use(Graph<T> graph, size_t connectivity) override;
 
 	/*
 	* @brief Конструктор по умолчанию
@@ -161,8 +161,8 @@ size_t KleitmanAlgorithm<T>::searchUniquePaths(Graph<T> g, size_t from, size_t t
 };
 
 template <typename T>
-bool KleitmanAlgorithm<T>::use(Graph<T> a, size_t connectivity) {
-	Graph<T> x = Graph<T>(a.getAdjacencyMatrix(), a.getNodeCount());
+bool KleitmanAlgorithm<T>::use(Graph<T> graph, size_t connectivity) {
+	Graph<T> x = Graph<T>(graph.getAdjacencyMatrix(), graph.getNodeCount());
 	size_t k = 0;
 	if (connectivity == 0)
 		return true;

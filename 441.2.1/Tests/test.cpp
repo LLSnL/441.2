@@ -167,6 +167,10 @@ namespace Tests{
 			KleitmanAlgorithm<size_t> k2;
 		};
 
+		TEST_F(CheckForGraphConnectivityTest, SetStrategyThrows) {
+			EXPECT_THROW(check1.setStrategy(nullptr), std::logic_error);
+		}
+
 		TEST_F(CheckForGraphConnectivityTest, SetStrategyWorks) {
 			EXPECT_NO_FATAL_FAILURE(check2.setStrategy(&i2));
 		};
@@ -250,6 +254,10 @@ namespace Tests{
 			DejkstraAlgorithm<bool> d1;
 			DejkstraAlgorithm<size_t> d2;
 		};
+
+		TEST_F(FindMinimalPathToNodesTest, SetStrategyThrows) {
+			EXPECT_THROW(check1.setStrategy(nullptr), std::logic_error);
+		}
 
 		TEST_F(FindMinimalPathToNodesTest, SetStrategyWorks) {
 			EXPECT_NO_FATAL_FAILURE(check1.setStrategy(&d1));
