@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\441.2.1\Graph.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="CheckForGraphConnectivityStrategy.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -37,6 +34,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="FindMinimalPathToNodes.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
