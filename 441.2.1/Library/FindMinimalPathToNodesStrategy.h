@@ -1,5 +1,5 @@
 #pragma once
-#include "../441.2.1/Graph.h"
+#include "../Library/Graph.h"
 
 /*
 * @brief Класс Strategy для алгоритмов поиска минимальных путей в графе.
