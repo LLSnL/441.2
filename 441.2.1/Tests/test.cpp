@@ -57,9 +57,9 @@ namespace Tests{
 				{-1, 0}, 
 				{2}
 			};
-			std::vector<std::vector<int>> x3 = {
-				{0, 1},
-				{0, 1}
+			std::vector<std::vector<double>> x3 = {
+				{0, 0.00004},
+				{0.00007, 1}
 			};
 			size_t y1 = 2, y2 = 2, y3 = 2;
 			EXPECT_THROW(Graph(x1, y1), std::logic_error);

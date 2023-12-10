@@ -1,6 +1,8 @@
 #pragma once
 #include <stdexcept>
 #include <vector>
+#include <limits>
+#include <cmath>
 /*
 * @brief Класс граф - содержит информацию о неориентированном графе, представленную в виде таблицы длин рёбер между узлами (если ребра нет, то его длина записывается как 0) и количества узлов графа.
 */
@@ -99,11 +101,10 @@ Graph<T>::Graph(const std::vector<std::vector<T>> adjacencyMatrix, const size_t 
 		if(adjacencyMatrix[i].size() != nodeCount)
 			throw std::logic_error("Размеры матрицы несовпадают с заявленным количеством узлов!");
 	}
-	double epsilon = 0.00001;
 	for (size_t i = 0; i < nodeCount; i++)
 	{
 		for (size_t j = i; j < nodeCount; j++) {
-			if ((double)adjacencyMatrix[i][j] - adjacencyMatrix[j][i] > epsilon)
+			if (std::fabsl(adjacencyMatrix[i][j] - adjacencyMatrix[j][i]) > std::numeric_limits<T>::epsilon())
 				throw std::logic_error("Граф должен быть неориентированным!");
 		}
 	}
