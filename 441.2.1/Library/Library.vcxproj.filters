@@ -33,13 +33,11 @@
     <ClInclude Include="KleitmanAlgorithm.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="IvenAlgorithm.h">
+    <ClInclude Include="IvenAlgorithm.h">
       <Filter>Файлы заголовков</Filter>
-    </ClCompile>
-    <ClCompile Include="FindMinimalPathToNodes.h">
+    </ClInclude>
+    <ClInclude Include="FindMinimalPathToNodes.h">
       <Filter>Файлы заголовков</Filter>
-    </ClCompile>
+    </ClInclude>
   </ItemGroup>
 </Project>
